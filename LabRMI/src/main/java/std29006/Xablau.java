@@ -2,44 +2,51 @@ package std29006;
 import std29006.Oraculo;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Classe que implementa a interface do objeto distribu´ıdo
  */
 public class Xablau implements Oraculo{
-    private int[] senhas = new int[4];
-    private String[] nomes = new String[4];
-    private int counter = 0;
+    private ArrayList<Integer> senhas = new ArrayList<Integer>();
+    private ArrayList<String> nomes = new ArrayList<String>();
     @Override
     public int gerarSenha(String nome) throws RemoteException {
-        if (counter != 4){
-            nomes[counter] = nome;
-            Random rand = new Random();
-            senhas[counter] = rand.nextInt(101);
-            counter ++;
-        }else
-           return -1;
+        if (nomes.contains(nome)==false){
+            if (this.senhas.size() < 4){
+                nomes.add(nome);
+                Random rand = new Random();
+                int sorteio = rand.nextInt(101);
+                while(senhas.contains(sorteio)==true){
+                    sorteio = rand.nextInt(101);
+                }
+                senhas.add(sorteio);
+                return sorteio;
+            }else
+                return -1;
+        }
+        return -1;
     }
 
     @Override
     public String gerarResultado() throws RemoteException {
-        if(counter!=4){
+        if(senhas.size() != 4){
             return "SemVencedor";
         }
         int aux = 1;
-        int aux1 = senhas[0];
-        int aux2 = senhas[1];
+        String nome = nomes.get(0);
+        int aux1 = senhas.get(0);
 
-        while(aux==counter){
-            if(aux1>aux2){
-                counter++;
-                aux2=senhas[counter];
-            }else{
-
+        while(aux<senhas.size()){
+            int aux2 = senhas.get(aux);
+            if(aux1<aux2){
+                aux1 = aux2;
+                nome = nomes.get(aux);
             }
-
+            aux++;
         }
-        return null;
+        String result = nome + aux1;
+        return result;
     }
 }

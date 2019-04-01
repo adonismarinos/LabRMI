@@ -28,10 +28,10 @@ public class Servidor2 {
                 porta = Integer.parseInt(args[1]);
             }
 // Criando
-            Contador c = new Contador();
+            Xablau c = new Xablau();
 // Definindo o hostname do servidor
             System.setProperty("java.rmi.server.hostname", nomeServidor);
-            ContadorDistribuido stub = (ContadorDistribuido)
+            Oraculo stub = (Oraculo)
                     UnicastRemoteObject.exportObject(c, 0);
 // Criando servi¸co de registro
             Registry registro = LocateRegistry.createRegistry(porta);
