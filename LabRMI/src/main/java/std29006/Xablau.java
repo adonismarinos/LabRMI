@@ -46,7 +46,7 @@ public class Xablau implements Oraculo{
             }
             aux++;
         }
-        String result = nome + aux1;
+        String result = nome + " " + aux1;
         return result;
     }
 }

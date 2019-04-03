@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class Servidor2 {
     // Constantes que indicam onde est´a sendo executado o servi¸co de registro,
 // qual porta e qual o nome do objeto distribu´ıdo
-    private static String nomeServidor = "127.0.0.1";
+    private static String nomeServidor = "191.36.13.100";
     private static int porta = 12345;
     private static final String NOMEOBJDIST = "MeuContador";
     public static void main(String args[]){
